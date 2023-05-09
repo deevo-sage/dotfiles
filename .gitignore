@@ -1,0 +1,76 @@
+# Ignore everything except directories
+*
+
+
+################################### WHITELIST ##################################
+
+# Config
+!./alacritty/**/*
+!./asdf/**/*
+!./bash/**/*
+!./composer/composer.json
+!./fish/*
+!./git/**/*
+!./hammerspoon/**/*
+!./karabiner/karabiner.json
+!./less/**/*
+!./kitty/**/*
+!./mackup/**/*
+!./nix/**/*
+!./nvim/**/*
+!./rclone/filter_list.txt
+!./snippets/**/*
+!./ssh/config
+!./starship/**/*
+!./tmux/**/*
+!./vim/**/*
+!./zsh/**/*
+
+# Git
+!.github/**/*
+!.gitignore
+!.gitignore_global
+!.gitmodules
+
+# Vim
+!minimal.vim
+!vim/**/*
+
+# Other dirs
+!bin/**/*
+!commands/**/*
+!misc/packages/**/*
+!tasks/**/*
+!tests/**/*
+!LaunchAgents/**/*
+
+# Other files
+!.tool-versions
+!./.color_mode
+!Rakefile
+!README.md
+!stylua.toml
+
+################################### BLACKLIST ##################################
+
+# Config
+./nvim/plugin
+./nvim-2*
+
+# Fish
+./fish/env
+./fish/fish_variables
+
+# Tmux
+./tmux/plugins
+./tmux/resurrect
+
+# Zsh
+.env
+bookmarks
+
+# Others
+misc/enhance-rails-intellisense-in-solargraph
+.DS_Store
+backup
+.repro
