@@ -11,14 +11,17 @@ require("tokyonight").setup({
         keywords = { italic = true },
         functions = {},
         variables = {},
+
         -- Background styles. Can be "dark", "transparent" or "normal"
         sidebars = "normal", -- style for sidebars, see below
         floats = "normal", -- style for floating windows
     },
 })
 
-vim.cmd [[colorscheme tokyonight]]
---[[
+--vim.cmd [[colorscheme tokyonight]]
+--vim.cmd [[colorscheme catppuccin]]
+--vim.cmd('colorscheme rose-pine')
+vim.cmd [[colorscheme moonfly]]
 vim.g.tokyonight_colors = {
   fg = "#839496",
   fg_dark = "#586e75",
@@ -38,7 +41,6 @@ vim.g.tokyonight_colors = {
   magenta = "#d33682",
   purple = "#6c71c4",
 }
-]]
 
 require('rose-pine').setup({
 	--- @usage 'auto'|'main'|'moon'|'dawn'
@@ -91,4 +93,4 @@ require('rose-pine').setup({
 })
 
 -- Set colorscheme after options
-vim.cmd('colorscheme rose-pine')
+--vim.cmd('colorscheme rose-pine')

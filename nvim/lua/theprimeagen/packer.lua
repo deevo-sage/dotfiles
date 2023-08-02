@@ -4,15 +4,24 @@ if (not status) then
     return
 end
 packer.startup(function(use)
+    use 'wakatime/vim-wakatime'
     use("wbthomason/packer.nvim")
+    use 'williamboman/mason.nvim'
+    use 'williamboman/mason-lspconfig.nvim'
     use 'bluz71/vim-moonfly-colors'
     use { "catppuccin/nvim", as = "catppuccin" }
-    use {'nvim-orgmode/orgmode', config = function()
-        require('orgmode').setup{}
-    end
-    }
     use( "christoomey/vim-tmux-navigator")
-
+use {
+    'Equilibris/nx.nvim',
+    requires = {
+        'nvim-telescope/telescope.nvim',
+    },
+    config = function()
+        require("nx").setup {}
+    end
+}
+    use("neovim/nvim-lspconfig")
+    use('kabouzeid/nvim-lspinstall')
 
   use({
 	  'rose-pine/neovim',
@@ -67,7 +76,6 @@ packer.startup(function(use)
     use("nvim-telescope/telescope.nvim")
     use "lewis6991/gitsigns.nvim"
     -- All the things
-    use("neovim/nvim-lspconfig")
     use("hrsh7th/cmp-nvim-lsp")
     use 'nvim-lualine/lualine.nvim' -- Statusline
     use("hrsh7th/cmp-buffer")
@@ -105,8 +113,6 @@ use {
     use 'jose-elias-alvarez/null-ls.nvim' -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
     use("svrana/neosolarized.nvim")
 
-    use 'williamboman/mason.nvim'
-    use 'williamboman/mason-lspconfig.nvim'
     use 'onsails/lspkind-nvim' -- vscode-like pictograms
     use 'kyazdani42/nvim-web-devicons' -- File icons
     use 'nvim-telescope/telescope-file-browser.nvim'

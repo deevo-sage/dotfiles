@@ -5,9 +5,14 @@ null_ls.setup {
     sources = {
         null_ls.builtins.formatting.prettierd.with({
             env = {
-                PRETTIERD_DEFAULT_CONFIG = vim.fn.expand("~/work/appbrew/.prettierrc"),
+                --PRETTIERD_DEFAULT_CONFIG = vim.fn.expand("~/work/appbrew/.prettierrc"),
             },
         }),
+
+    null_ls.builtins.diagnostics.eslint_d.with({
+      diagnostics_format = '[eslint] #{m}\n(#{c})'
+    }),
+    null_ls.builtins.diagnostics.fish,
         --null_ls.builtins.diagnostics.eslint_d,
         null_ls.builtins.completion.luasnip,
     },

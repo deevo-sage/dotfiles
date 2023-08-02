@@ -1,13 +1,13 @@
 --vim.g.theprimeagen_colorscheme = "tokyonight"
 
-function ColorMyPencilsmeh()
+function ColorMyPencils()
     vim.g.gruvbox_contrast_dark = 'sex'
-    vim.g.tokyonight_transparent_sidebar = true
-    vim.g.tokyonight_transparent = true
+    vim.g.tokyonight_transparent_sidebar =false
+    vim.g.tokyonight_transparent =false
     vim.g.gruvbox_invert_selection = '0'
     vim.opt.background = "dark"
 
-    vim.cmd("colorscheme " .. vim.g.theprimeagen_colorscheme)
+    --vim.cmd("colorscheme " .. vim.g.theprimeagen_colorscheme)
 
     local hl = function(thing, opts)
         vim.api.nvim_set_hl(0, thing, opts)
@@ -19,16 +19,13 @@ function ColorMyPencilsmeh()
 
     hl("ColorColumn", {
         ctermbg = 0,
-        bg = "#555555",
+        bg = "none",
     })
 
     hl("CursorLineNR", {
         bg = "None"
     })
 
-    hl("Normal", {
-        bg = "none"
-    })
 
     hl("LineNr", {
         fg = "#5eacd3"
@@ -45,7 +42,7 @@ require('rose-pine').setup({
     disable_background = true
 })
 
-function ColorMyPencils(color)
+function ColorMyPencils2(color)
 	color = color or "rose-pine"
 	vim.cmd.colorscheme(color)
 
@@ -106,4 +103,4 @@ function ColorMyPencils(color)
 
 end
 
-ColorMyPencils()
+ColorMyPencils2()

@@ -33,7 +33,7 @@ hidden=true,
             mappings = {
                 -- your custom insert mode mappings
                 ["i"] = {
-                    ["<C-w>"] = function() vim.cmd('normal vbd') end,
+                    ["<C-d>"] = function() vim.cmd('normal vbd') end,
                 },
                 ["n"] = {
                     -- your custom normal mode mappings
