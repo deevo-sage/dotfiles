@@ -17,6 +17,7 @@ return {
         "shfmt",
         "tailwindcss-language-server",
         "typescript-language-server",
+        "graphql",
         "css-lsp",
       })
     end,

@@ -1,6 +1,10 @@
 return {
   -- messages, cmdline and the popupmenu
   {
+    -- General options
+    "andweeb/presence.nvim",
+  },
+  {
     "folke/noice.nvim",
     opts = function(_, opts)
       table.insert(opts.routes, {
