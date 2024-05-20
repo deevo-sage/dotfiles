@@ -5,6 +5,10 @@ return {
   {
     "wakatime/vim-wakatime",
   },
+  --{  --    "jpmcb/nvim-llama",  opts = {model = "codellama",},-- The model for ollama to use. This model will be automatically downloaded.},
+  {
+    "mbbill/undotree",
+  },
   -- tools
   {
     "williamboman/mason.nvim",
@@ -17,7 +21,6 @@ return {
         "shfmt",
         "tailwindcss-language-server",
         "typescript-language-server",
-        "graphql",
         "css-lsp",
       })
     end,
@@ -40,7 +43,7 @@ return {
           root_dir = function(...)
             return require("lspconfig.util").root_pattern(".git")(...)
           end,
-          single_file_support = false,
+          single_file_support = true,
           settings = {
             typescript = {
               inlayHints = {
