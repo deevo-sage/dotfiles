@@ -1,6 +1,12 @@
 return {
   -- Create annotations with one keybind, and jump your cursor in the inserted annotation
   {
+    "razak17/tailwind-fold.nvim",
+    opts = {},
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    ft = { "html", "svelte", "astro", "vue", "typescriptreact", "php", "blade", "tsx", "ts" },
+  },
+  {
     "danymat/neogen",
     keys = {
       {
@@ -32,6 +38,16 @@ return {
     keys = {
       {
         "<leader>r",
+        function()
+          require("refactoring").select_refactor()
+        end,
+        mode = "v",
+        noremap = true,
+        silent = true,
+        expr = false,
+      },
+      {
+        "<C-k>",
         function()
           require("refactoring").select_refactor()
         end,
@@ -89,6 +105,7 @@ return {
     cmd = "SymbolsOutline",
     opts = {
       position = "right",
+      autofold_depth = 2,
     },
   },
 
@@ -97,7 +114,8 @@ return {
     dependencies = { "hrsh7th/cmp-emoji" },
     opts = function(_, opts)
       --table.insert(opts.sources, { name = "emoji" })
-      table.insert(opts.sources, { name = "codeium" })
+      table.insert(opts.sources, 1, { name = "supermaven" })
+      --   table.insert(opts.sources, { name = "codeium" })
     end,
   },
 }

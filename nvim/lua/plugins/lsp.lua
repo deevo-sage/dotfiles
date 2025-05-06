@@ -1,7 +1,20 @@
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+-- Show line diagnostics automatically in hover window
+vim.o.updatetime = 250
+vim.cmd([[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]])
+vim.diagnostic.enable()
+vim.diagnostic.config({
   virtual_text = false,
 })
 return {
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
+  },
   {
     "wakatime/vim-wakatime",
   },
@@ -10,27 +23,12 @@ return {
     "mbbill/undotree",
   },
   -- tools
-  {
-    "williamboman/mason.nvim",
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, {
-        "stylua",
-        "selene",
-        "luacheck",
-        "shellcheck",
-        "shfmt",
-        "tailwindcss-language-server",
-        "typescript-language-server",
-        "css-lsp",
-      })
-    end,
-  },
 
   -- lsp servers
   {
     "neovim/nvim-lspconfig",
     opts = {
-      inlay_hints = { enabled = false },
+      inlay_hints = { enabled = true },
       ---@type lspconfig.options
       servers = {
         cssls = {},
@@ -39,32 +37,53 @@ return {
             return require("lspconfig.util").root_pattern(".git")(...)
           end,
         },
+        eslint = {
+          inlay_hints = { enabled = true },
+          settings = {
+            -- This is where you can disable hints if they're coming from ESLint
+            -- But ESLint itself typically doesn't provide inlay hints.
+          },
+          on_attach = function(client, bufnr)
+            -- If eslint-lsp is showing inlay hints, ensure they are disabled here.
+            -- For example, for tsserver:
+            if client.server_capabilities.inlayHintProvider then
+              -- Disable inlay hints globally for the LSP
+              client.server_capabilities.inlayHintProvider = true
+            end
+          end,
+        },
         tsserver = {
           root_dir = function(...)
             return require("lspconfig.util").root_pattern(".git")(...)
           end,
           single_file_support = true,
+          inlay_hints = { enabled = false },
           settings = {
             typescript = {
+              diagnostics = {
+                enabled = false,
+              },
               inlayHints = {
-                includeInlayParameterNameHints = "literal",
+                enalbed = false,
+                includeInlayParameterNameHints = "none",
                 includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                includeInlayFunctionParameterTypeHints = true,
+                includeInlayFunctionParameterTypeHints = false,
                 includeInlayVariableTypeHints = false,
-                includeInlayPropertyDeclarationTypeHints = true,
-                includeInlayFunctionLikeReturnTypeHints = true,
-                includeInlayEnumMemberValueHints = true,
+                includeInlayPropertyDeclarationTypeHints = false,
+                includeInlayFunctionLikeReturnTypeHints = false,
+                includeInlayEnumMemberValueHints = false,
               },
             },
             javascript = {
               inlayHints = {
-                includeInlayParameterNameHints = "all",
+                enabled = false,
+                includeInlayParameterNameHints = "literal",
                 includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                includeInlayFunctionParameterTypeHints = true,
-                includeInlayVariableTypeHints = true,
-                includeInlayPropertyDeclarationTypeHints = true,
-                includeInlayFunctionLikeReturnTypeHints = true,
-                includeInlayEnumMemberValueHints = true,
+                includeInlayFunctionParameterTypeHints = false,
+                includeInlayVariableTypeHints = false,
+                includeInlayPropertyDeclarationTypeHints = false,
+                includeInlayFunctionLikeReturnTypeHints = false,
+                includeInlayEnumMemberValueHints = false,
               },
             },
           },
@@ -132,7 +151,7 @@ return {
                 unusedLocalExclude = { "_*" },
               },
               format = {
-                enable = false,
+                enable = true,
                 defaultConfig = {
                   indent_style = "space",
                   indent_size = "2",
@@ -144,6 +163,40 @@ return {
         },
       },
       setup = {},
+    },
+  },
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        ["astro"] = { "prettierd" },
+        ["javascript"] = { "prettierd" },
+        ["javascriptreact"] = { "prettierd" },
+        ["typescript"] = { "prettierd" },
+        ["typescriptreact"] = { "prettierd" },
+        ["vue"] = { "prettierd" },
+        ["css"] = { "prettierd" },
+        ["scss"] = { "prettierd" },
+        ["less"] = { "prettierd" },
+        ["html"] = { "prettierd" },
+        ["json"] = { "prettierd" },
+        ["jsonc"] = { "prettierd" },
+        ["yaml"] = { "prettierd" },
+        ["markdown"] = { "prettierd" },
+        ["markdown.mdx"] = { "prettierd" },
+        ["graphql"] = { "prettierd" },
+        ["handlebars"] = { "prettierd" },
+        ["sql"] = { "sql_formatter" },
+      },
+    },
+  },
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
     },
   },
 }

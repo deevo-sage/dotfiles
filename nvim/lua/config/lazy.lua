@@ -16,8 +16,30 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.typescript" },
     { import = "lazyvim.plugins.extras.lang.json" },
     { import = "lazyvim.plugins.extras.lang.rust" },
+    { import = "lazyvim.plugins.extras.util.dot" },
+    { import = "lazyvim.plugins.extras.coding.yanky" },
+    -- { import = "lazyvim.plugins.extras.coding.mini-sorround" },
     { import = "lazyvim.plugins.extras.lang.tailwind" },
-    { import = "lazyvim.plugins.extras.coding.copilot" },
+    --{ import = "lazyvim.plugins.extras.coding.copilot" },
+    {
+      "supermaven-inc/supermaven-nvim",
+      config = function()
+        require("supermaven-nvim").setup({
+          keymaps = {
+            accept_suggestion = "<C-h>",
+            clear_suggestion = "<C-]>",
+            accept_word = "<C-j>",
+          },
+          ignore_filetypes = { cpp = true },
+          color = {
+            suggestion_color = "#ffffff",
+            cterm = 244,
+          },
+          disable_inline_completion = false, -- disables inline completion for use with cmp
+          disable_keymaps = false, -- disables built in keymaps for more manual control
+        })
+      end,
+    },
     { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
     { import = "lazyvim.plugins.extras.ui.mini-animate" },
     -- import/override with your plugins

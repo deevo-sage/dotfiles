@@ -26,6 +26,8 @@ vim.keymap.set("n", "<leader>a", function()
 end, { silent = true })
 vim.keymap.set("n", "<C-i>", '<CMD>lua require("FTerm").toggle()<CR>')
 vim.keymap.set("t", "<C-i>", '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
+vim.keymap.set("n", "T", '<CMD>lua require("FTerm").toggle()<CR>')
+vim.keymap.set("t", "T", '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
 
 vim.keymap.set("n", "<C-e>", function()
   require("harpoon.ui").toggle_quick_menu()

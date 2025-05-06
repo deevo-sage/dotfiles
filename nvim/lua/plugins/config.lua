@@ -70,6 +70,15 @@ return {
       "nvim-telescope/telescope-file-browser.nvim",
     },
     keys = {
+
+      {
+        ";t",
+        function()
+          local builtin = require("telescope.builtin")
+          builtin.treesitter({})
+        end,
+        desc = "Find Plugin File",
+      },
       {
         "<leader>fP",
         function()
@@ -107,7 +116,7 @@ return {
         desc = "Lists open buffers",
       },
       {
-        ";t",
+        "<leader>t",
         function()
           local builtin = require("telescope.builtin")
           builtin.help_tags()

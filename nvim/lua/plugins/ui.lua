@@ -2,7 +2,7 @@ return {
   -- messages, cmdline and the popupmenu
   {
     -- General options
-    "andweeb/presence.nvim",
+    --"andweeb/presence.nvim",
   },
   {
     "folke/noice.nvim",
@@ -65,21 +65,6 @@ return {
   },
 
   -- animations
-  {
-    "echasnovski/mini.animate",
-    event = "VeryLazy",
-    opts = function(_, opts)
-      opts.scroll = {
-        enable = false,
-      }
-      opts.cursor = {
-        enable = false,
-      }
-      opts.resize = {
-        enable = false,
-      }
-    end,
-  },
 
   -- buffer line
   {
@@ -106,7 +91,7 @@ return {
     opts = {
       options = {
         -- globalstatus = false,
-        theme = "solarized-osaka-night",
+        theme = "auto",
       },
     },
   },
@@ -150,27 +135,109 @@ return {
       plugins = {
         gitsigns = true,
         tmux = true,
-        kitty = { enabled = false, font = "+2" },
+        kitty = { enabled = true, font = "+2" },
+      },
+
+      window = {
+        backdrop = 0.95, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
+        -- height and width can be:
+        -- * an absolute number of cells when > 1
+        -- * a percentage of the width / height of the editor when <= 1
+        -- * a function that returns the width or the height
+        width = 80, -- width of the Zen window
+        height = 1, -- height of the Zen window
+        -- by default, no options are changed for the Zen window
+        -- uncomment any of the options below, or add other vim.wo options you want to apply
+        options = {
+          -- signcolumn = "no", -- disable signcolumn
+          -- number = false, -- disable number column
+          -- relativenumber = false, -- disable relative numbers
+          -- cursorline = false, -- disable cursorline
+          -- cursorcolumn = false, -- disable cursor column
+          -- foldcolumn = "0", -- disable fold column
+          -- list = false, -- disable whitespace characters
+        },
       },
     },
     keys = { { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen Mode" } },
   },
 
   {
-    "nvimdev/dashboard-nvim",
-    event = "VimEnter",
-    opts = function(_, opts)
-      local logo = [[
-███████╗██╗██████╗ ██╗███╗   ██╗██╗   ██╗██╗███╗   ███╗
-██╔════╝██║██╔══██╗██║████╗  ██║██║   ██║██║████╗ ████║
-███████╗██║██║  ██║██║██╔██╗ ██║██║   ██║██║██╔████╔██║
-╚════██║██║██║  ██║██║██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║
-███████║██║██████╔╝██║██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║
-╚══════╝╚═╝╚═════╝ ╚═╝╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝
-      ]]
+    "snacks.nvim",
+    opts = {
+      dashboard = {
+        preset = {
+          pick = function(cmd, opts)
+            return LazyVim.pick(cmd, opts)()
+          end,
+          header = [[
 
-      logo = string.rep("\n", 8) .. logo .. "\n\n"
-      opts.config.header = vim.split(logo, "\n")
+⠀⠀⠀⠀⠀⠀⠀⣀⡤⠴⠒⠛⠉⠉⠉⣉⡉⠩⡉⠩⣉⡙⠒⠲⠤⣤⣀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⣀⡴⠛⣡⠔⠊⠁⠀⣠⠔⠋⢁⠔⠁⠈⢢⠀⠈⠑⠢⣄⡀⠉⠓⢦⡀⠀⠀⠀
+⠀⠀⢀⡾⠋⡴⠋⠀⠀⢀⡴⠊⠀⠀⣠⠋⠀⠀⠀⠀⢣⠀⠀⠀⠀⠉⠲⣄⠀⠙⢦⠀⠀
+⠀⢠⠟⢀⠎⠀⠀⠀⣠⠊⠀⠀⠀⣰⠃⠀⠀⠀⠀⠀⠈⡇⠀⠀⠀⠀⠀⠈⠳⣄⠈⢧⠀
+⠀⡟⢠⠏⠀⠀⠀⡼⠁⠀⠀⠀⢰⠃⠀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠈⠆⠸⡇
+⢸⠃⡞⠀⠀⠀⣸⠁⠀⠀⠀⠀⡏⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⡇
+⣾⢠⡇⠀⠀⢠⡇⠀⠀⠀⠀⠀⠃⠀⢠⣴⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⡶⠲⡾⠿⠃
+⣿⠸⠇⠀⠀⠀⠃⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠞⠁⠀⠀
+⠙⠓⠒⠒⠒⠒⠶⣖⡒⠒⠒⠒⠒⢺⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠐⠤⠉⠛⠲⠦⡄⠘⣿⣿⣿⣿⣿⣿⣿⡿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⡆⣷⠀⠉⠉⠛⠛⠉⠉⠙⡇⠀⠙⢯⡉⠉⠉⠁⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡼⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⠀⠻⡄⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⣤⠞⠉⠁⢀⣀⣠⠤⠤⠄⠒⠒⢲⠇⠀⠀⠀⠀⢻⠳⡄⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⣾⠁⢰⠖⠚⠉⠀⢀⣀⣠⣤⠤⠤⣼⠀⠀⠀⠀⠀⢸⠀⣿⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⡸⣧⣈⣠⠤⠖⢺⡋⠀⢠⠇⠀⠀⡏⠀⠀⠀⠀⠀⢸⠟⠁⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⡞⠀⠀⠀⣧⠀⠀⠀⠀⢀⡼⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⢀⡇⡄⠀⠐⠘⠦⣀⣀⡤⠞⠁⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣇⣸⣃⠅⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡟⢹⣿⣿⡟⢷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+          ]],
+          header2 = [[
+  (                                 _
+   )                               /=>
+  (  +____________________/\/\___ / /|
+   .''._____________'._____      / /|/\
+  : () :              :\ ----\|    \ )
+   '..'______________.'0|----|      \
+                    0_0/____/        \
+                        |----    /----\
+                       || -\\ --|      \
+                       ||   || ||\      \
+                        \\____// '|      \
+Bang! Bang!                     .'/       |
+                               .:/        |
+                               :/_________|
+ ]],
+        -- stylua: ignore
+        ---@type snacks.dashboard.Item[]
+        keys = {
+          { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+          { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+          { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+          { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+          { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
+          { icon = " ", key = "s", desc = "Restore Session", section = "session" },
+          { icon = " ", key = "x", desc = "Lazy Extras", action = ":LazyExtras" },
+          { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy" },
+          { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+        },
+        },
+      },
+    },
+  },
+  {
+    "echasnovski/mini.animate",
+    event = "VeryLazy",
+    opts = function(_, opts)
+      opts.scroll = {
+        enable = false,
+      }
+      opts.cursor = {
+        enable = false,
+      }
+      opts.resize = {
+        enable = false,
+      }
     end,
   },
 }

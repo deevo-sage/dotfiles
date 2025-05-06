@@ -49,10 +49,17 @@ return {
     },
   },
   {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
+  { "nyoom-engineering/oxocarbon.nvim" },
+  {
     --solarized-osaka
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "solarized-osaka-night",
+      colorscheme = "catppuccin-mocha",
     },
   },
   {
